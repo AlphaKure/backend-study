@@ -1,17 +1,19 @@
 # connect database
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base,sessionmaker
+import os
 
-DB_URL = r'sqlite:///database.db'
+from dotenv import load_dotenv
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine,AsyncSession
 
-engine = create_engine(
+load_dotenv()
+DB_URL=os.getenv("DB_URL")
+
+engine = create_async_engine(
     url=DB_URL,
-    connect_args={"check_same_thread": False} # For sqlite
+    future=True,
+    echo=True
 )
+#connect_args={"check_same_thread": False} # For sqlite
 
-session = sessionmaker(
-    bind=engine,
-    autocommit=False,
-    autoflush=False
-)
+sessions = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)

@@ -7,6 +7,10 @@ Base = declarative_base()
 
 class User(Base):
 
-    __tablename__='user'
-    id = Column(Integer,primary_key=True)
-    name =Column(String(100),nullable=False)
+    __tablename__ = "user"
+    id = Column(String(),primary_key=True)
+    username = Column(String(),nullable=False,unique=True)
+    password = Column(String(),nullable=False)
+    email = Column(String(),nullable=False,unique=True)
+    level = Column(Integer)
+

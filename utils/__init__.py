@@ -1,4 +1,10 @@
-from utils.database import engine
+from utils.database import engine,sessions
 from utils.models import Base
 
-Base.metadata.create_all(engine) # 建立表格
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+async def close_db():
+    async with engine.begin() as conn:
+        await conn.close()
