@@ -9,3 +9,6 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     email: str 
     password: str
+
+class Auth(UserBase):
+    password :str
