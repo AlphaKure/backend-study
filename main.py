@@ -15,7 +15,7 @@ async def liftspan(app:FastAPI):
 
 app = FastAPI(
     title="Backend-Study",
-    version="0.0.3",
+    version="0.1.0",
     lifespan=liftspan,
     openapi_tags=[
         {"name":"user"},{"name":"auth"},{"name":"ping"}
