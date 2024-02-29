@@ -8,7 +8,7 @@ from fastapi import HTTPException
 
 def jwt_encode(datas:dict):
     temp=datas.copy()
-    temp["exp"] = dt.datetime.utcnow()+dt.timedelta(hours=int(os.getenv("TOKEN_EXPIRE_HOURS")))
+    temp["exp"] = dt.datetime.utcnow()+dt.timedelta(hours=int(os.getenv("TOKEN_EXPIRE_HOURS"))) # 設定token有效時長 exp不能改
     encoded_jwt = jwt.encode(temp,os.getenv("TOKEN_SECRET"))
     return encoded_jwt
 

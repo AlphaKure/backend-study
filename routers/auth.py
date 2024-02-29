@@ -19,7 +19,11 @@ async def get_db():
             yield UserDAL(session)
 
 def decode_token(token:str=Depends(oauth2_token_scheme)):
+    """
+    解密token用depends
 
+    裡面目前只有username
+    """
     datas=jwt_verify(token)
     if datas:
         return datas
