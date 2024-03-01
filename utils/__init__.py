@@ -1,5 +1,5 @@
 from utils.database import engine,sessions
-from utils.models import Base
+from models.tables import Base
 
 async def init_db():
     async with engine.begin() as conn:

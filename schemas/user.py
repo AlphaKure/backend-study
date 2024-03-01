@@ -12,4 +12,4 @@ class UserCreate(UserBase):
 
 class UserInfo(UserBase):
     email: str
-    level: int
+    verified: bool

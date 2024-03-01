@@ -53,4 +53,3 @@ async def auth(req:Request,form:OAuth2PasswordRequestForm=Depends(),db:UserDAL=D
     else:
         raise HTTPException(status_code=401,detail="Incorrect username or password",headers={"WWW-Authenticate": "Bearer"})
 
-    

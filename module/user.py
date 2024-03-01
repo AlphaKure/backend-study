@@ -1,22 +1,18 @@
 from const import hash_password
-from utils.models import User
+from models.tables import User
+from module.base import DAL
 
-from sqlalchemy import select,delete,update
-from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 # https://towardsdatascience.com/build-an-async-python-service-with-fastapi-sqlalchemy-196d8792fa08
 
-class UserDAL:
-
-    def __init__(self,db:Session) -> None:
-        self.db = db
+class UserDAL(DAL):
 
     async def create_user(self,username:str,email:str,password:str):
         newUser=User(
             username= username,
             email= email,
-            password= hash_password(password),
-            level= 0
+            password= hash_password(password)
         ) # 填入table
         self.db.add(newUser)
         await self.db.flush()
