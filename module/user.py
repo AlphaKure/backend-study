@@ -2,7 +2,9 @@ from const import hash_password
 from models.tables import User
 from module.base import DAL
 
-from sqlalchemy import select
+import datetime as dt
+
+from sqlalchemy import select,insert
 
 # https://towardsdatascience.com/build-an-async-python-service-with-fastapi-sqlalchemy-196d8792fa08
 
@@ -34,4 +36,4 @@ class UserDAL(DAL):
         if len(resp) == 0:
             return {}
         else:
-            return {"username":resp[0].username,"email":resp[0].email,"level":resp[0].level}
+            return {"username":resp[0].username,"email":resp[0].email,"verified":resp[0].verified}

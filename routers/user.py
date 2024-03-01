@@ -41,12 +41,12 @@ async def user_register(req:Request,reqBody:UserCreate,db:UserDAL=Depends(get_db
         )
     except IntegrityError :
         raise HTTPException(status_code=400,detail="Username or email used!")
-    return JSONResponse(content= {"detail":""}, status_code=200)
+    return JSONResponse(content= {"detail":"success"}, status_code=200)
 
 @route.get(
     '/',
     responses={
-        200:{"description":"Request Accept","content":{"application/json":{"example":{"username":"username","email":"user@email.com","level":0}}}}
+        200:{"description":"Request Accept","content":{"application/json":{"example":{"username":"username","email":"user@email.com","verified":False}}}}
     }
 )
 async def get_current_user(datas:dict=Depends(decode_token),db:UserDAL=Depends(get_db)):
@@ -57,6 +57,6 @@ async def get_current_user(datas:dict=Depends(decode_token),db:UserDAL=Depends(g
     Returns:
      - username (str) 使用者帳號
      - email (str) 使用者電子信箱
-     - varified (bool) 是否通過驗證
+     - verified (bool) 是否通過驗證
     """
     return await db.get_target_user_info(datas.get("username"))
